@@ -16,7 +16,7 @@ function Fura.Combo(myHero, sprout, tpout, x)
  
 
           
-          if Menu.IsEnabled(Fura.optionEnable) then
+          if Menu.IsEnabled(Fura.optionEnable) and Abilitu.IsCastable(sprout, myMana) then
                Ability.CastTarget(sprout, myHero) 
                return
                            end                        
