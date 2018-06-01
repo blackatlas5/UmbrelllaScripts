@@ -4,11 +4,6 @@ Fura.optionEnable = Menu.AddOptionBool({"Hero Specific", "Escape"}, "Enable", fa
 Fura.optionKey = Menu.AddKeyOption({"Hero Specific", "Escape"}, "Combo Key", Enum.ButtonCode.KEY_T)
 
 
-function sleep(ms) 
-    local b = os.clock() * 1000 
-    while os.clock() * 1000 - b <= ms do end 
-end
-
 
 function Fura.Combo(myHero, sprout, tpout, x)
 
@@ -23,16 +18,14 @@ function Fura.Combo(myHero, sprout, tpout, x)
           
           if Menu.IsEnabled(Fura.optionEnable) then
                Ability.CastTarget(sprout, myHero) 
-                           end  
-                         
-delay(1000)
+               return
+                           end                        
 
-          if  Menu.IsEnabled(Fura.optionEnable) then
+
+          if  Menu.IsEnabled(Fura.optionEnable) and Abilitu.IsCastable(tpout, myMana) then
               	Ability.CastTarget(tpout, myHero) 
-                           end 
-       
-
-                                      
+              	return
+                           end                                  
  end
 
 
