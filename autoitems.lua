@@ -25,7 +25,7 @@ function autoitems.OnUpdate()
   end
 
   if Menu.IsEnabled(autoitems.wandEnable) and gradestick and Item.GetCurrentCharges(gradestick) > 0 and Entity.GetHealth(me) < 120 then
-    Ability.CastNoTarget(lowstick)
+    Ability.CastNoTarget(gradestick)
   end
 
 
