@@ -16,6 +16,7 @@ function BountyHunter.OnUpdate()
 
 	 		for _,hero in pairs(Heroes.GetAll()) do
 	 			if NPC.HasModifier(hero, "modifier_bounty_hunter_track_effect")	then return end
+				if NPC.HasModifier(myHero, "modifier_bounty_hunter_wind_walk") then return end
 			if hero ~= nil and hero ~= 0 and NPCs.Contains(hero) and NPC.IsEntityInRange(myHero,hero,Ability.GetCastRange(track)) and not Entity.IsSameTeam(hero,myHero) then
 				if Entity.IsAlive(hero) and not Entity.IsDormant(hero) and not NPC.IsIllusion(hero) and BountyHunter.IsHasGuard(hero) == "nil" then
 					if Entity.GetHealth(hero) < 300
@@ -30,7 +31,7 @@ function BountyHunter.OnUpdate()
 						or NPC.GetUnitName(hero) == "npc_dota_hero_tinker"
 						or NPC.GetUnitName(hero) == "npc_dota_hero_broodmother"
 						or NPC.GetUnitName(hero) == "npc_dota_hero_treant"
-						or NPC.GetUnitName(hero) == "npc_dota_hero_nyx_assassin"						
+						or NPC.GetUnitName(hero) == "npc_dota_hero_nyx_assassin"
 						then
 
 												Ability.CastTarget(track, hero)
