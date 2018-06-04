@@ -34,8 +34,8 @@ function Sven.Combo(me, enemy)
       blink = NPC.GetItem(me, "item_blink")
       mom = NPC.GetItem(me, "item_mask_of_madness")
 
-    if not NPC.IsIllusion(enemy) then   
-    if Entity.GetHealth(enemy) > 0 then
+      
+      if Entity.GetHealth(enemy) > 0 then
 
 
 if warcry and Menu.IsEnabled(Sven.AddWarcry) and Ability.IsCastable(warcry, mana) and Ability.IsReady(warcry) then
@@ -68,7 +68,7 @@ if mom and Menu.IsEnabled(Sven.AddMOM) and Ability.IsCastable(mom, mana) and Abi
   return
 end
 
-end
+
 
 end
 
