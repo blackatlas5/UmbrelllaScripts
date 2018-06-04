@@ -8,7 +8,6 @@ Sven.Enable = Menu.AddOptionBool({ "Hero Specific", "Sven" }, "Enable Combo?", f
 Sven.Key = Menu.AddKeyOption({ "Hero Specific", "Sven" }, "Combo Key", Enum.ButtonCode.BUTTON_CODE_NONE)
 Sven.AddWarcry = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "WarCry", false)
 Sven.AddUltimate = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Ultimate", false)
-Sven.AddArmlet= Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Armlet", false)
 Sven.AddBKB = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "BKB", false)
 Sven.AddStun = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Stun", false)
 Sven.AddBlink = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Blink Dagger", false)
@@ -31,7 +30,6 @@ function Sven.Combo(me, enemy)
       warcry = NPC.GetAbility(me, "sven_warcry")
       stun = NPC.GetAbility(me, "sven_storm_bolt")
       ultimate = NPC.GetAbility(me, "sven_gods_strength")
-      armlet = NPC.GetItem(me, "item_armlet")
       bkb = NPC.GetItem(me, "item_black_king_bar")
       blink = NPC.GetItem(me, "item_blink")
       mom = NPC.GetItem(me, "item_mask_of_madness")
@@ -42,39 +40,32 @@ function Sven.Combo(me, enemy)
 
 if warcry and Menu.IsEnabled(Sven.AddWarcry) and Ability.IsCastable(warcry, mana) and Ability.IsReady(warcry) then
   Ability.CastNoTarget(warcry)
---  return
+return
 end
 
 if bkb and Menu.IsEnabled(Sven.AddBKB) and Ability.IsCastable(bkb, mana) and Ability.IsReady(bkb) then
   Ability.CastNoTarget(bkb)
---  return
-end
-
-if armlet and Menu.IsEnabled(Sven.AddArmlet) and Ability.IsCastable(armlet, mana) and Ability.IsReady(armlet) then
-  Ability.Toggle(armlet)
---  return
+ return
 end
 
 if ultimate and Menu.IsEnabled(Sven.AddUltimate) and Ability.IsCastable(ultimate, mana) and Ability.IsReady(ultimate) then
   Ability.CastNoTarget(ultimate)
---  return
+ return
 end
 
 if blink and Menu.IsEnabled(Sven.AddBlink) and Ability.IsReady(blink) then
    Ability.CastPosition(blink, Entity.GetAbsOrigin(enemy))
-  --return
+  return
 end
-
-
 
 if stun and Menu.IsEnabled(Sven.AddStun) and Ability.IsCastable(stun, mana) and Ability.IsReady(stun) then
    Ability.CastTarget(stun, enemy)
---  return
+ return
 end
 
 if mom and Menu.IsEnabled(Sven.AddMOM) and Ability.IsCastable(mom, mana) and Ability.IsReady(mom) then
    Ability.CastNoTarget(mom)
-  --return
+  return
 end
 
 end
