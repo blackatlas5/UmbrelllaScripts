@@ -9,15 +9,19 @@ Sven.Key = Menu.AddKeyOption({ "Hero Specific", "Sven" }, "Combo Key", Enum.Butt
 Sven.AddWarcry = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "WarCry", false)
 Sven.AddUltimate = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Ultimate", false)
 Sven.AddBKB = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "BKB", false)
+Sven.AddSatanic = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Satanic", false)
+Sven.AddBloodthorn = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Bloodthorn", false)
 Sven.AddStun = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Stun", false)
 Sven.AddBlink = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Blink Dagger", false)
 Sven.AddMOM = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Mask Of Madn@ss", false)
+
 
 function Sven.OnUpdate()
   if not Menu.IsEnabled( Sven.Enable ) then return end
 
   me = Heroes.GetLocal()
   mana = NPC.GetMana(me)
+
     if not me or NPC.GetUnitName(me) ~= "npc_dota_hero_sven" then return end
 
     if Menu.IsKeyDown(Sven.Key) then Sven.Combo(me, enemy) end
@@ -33,10 +37,19 @@ function Sven.Combo(me, enemy)
       bkb = NPC.GetItem(me, "item_black_king_bar")
       blink = NPC.GetItem(me, "item_blink")
       mom = NPC.GetItem(me, "item_mask_of_madness")
+      satanic = NPC.GetItem(me, "item_satanic")
+      bloodthorn = NPC.GetItem(me, "item_bloodthorn")
 
-      
+
+
+      if NPC.IsLinkensProtected(enemy) then return end
       if Entity.GetHealth(enemy) > 0 then
 
+
+if satanic and Menu.IsEnabled(Sven.AddSatanic) and Ability.IsCastable(satanic, mana) and Ability.IsReady(satanic) then
+          Ability.CastNoTarget(satanic)
+        return
+        end
 
 if warcry and Menu.IsEnabled(Sven.AddWarcry) and Ability.IsCastable(warcry, mana) and Ability.IsReady(warcry) then
   Ability.CastNoTarget(warcry)
@@ -58,6 +71,11 @@ if blink and Menu.IsEnabled(Sven.AddBlink) and Ability.IsReady(blink) then
   return
 end
 
+if bloodthorn and Menu.IsEnabled(Sven.AddBloodthorn) and Ability.IsReady(bloodthorn) then
+   Ability.CastTarget(bloodthorn, enemy)
+  return
+end
+
 if stun and Menu.IsEnabled(Sven.AddStun) and Ability.IsCastable(stun, mana) and Ability.IsReady(stun) then
    Ability.CastTarget(stun, enemy)
  return
@@ -68,9 +86,7 @@ if mom and Menu.IsEnabled(Sven.AddMOM) and Ability.IsCastable(mom, mana) and Abi
   return
 end
 
-
-
-end
+        end
 
 end
 
