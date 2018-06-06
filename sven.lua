@@ -18,7 +18,7 @@ Sven.AddMOM = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Mask Of Ma
 Sven.Satan = Menu.AddOptionSlider({"Hero Specific", "Sven", "Auto Satanic"}, "hp for acrivation", 400, 2000, 1000)
 
 function Sven.OnUpdate()
-  if not Menu.IsEnabled( Sven.Enable ) then return end
+  
 
   me = Heroes.GetLocal()
   mana = NPC.GetMana(me)
@@ -26,7 +26,7 @@ function Sven.OnUpdate()
 
     if not me or NPC.GetUnitName(me) ~= "npc_dota_hero_sven" then return end
 
-    if Menu.IsKeyDown(Sven.Key) then Sven.Combo(me, enemy) end
+    if Menu.IsKeyDown(Sven.Key) and Menu.IsEnabled(Sven.Enable) then Sven.Combo(me, enemy) end
     satanic = NPC.GetItem(me, "item_satanic")
     if satanic and Entity.GetHealth(me) < hp and Menu.IsEnabled(Sven.AddSatanic) and Ability.IsCastable(satanic, mana) and Ability.IsReady(satanic) then
               Ability.CastNoTarget(satanic)
