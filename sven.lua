@@ -18,7 +18,7 @@ Sven.AddMOM = Menu.AddOptionBool({"Hero Specific", "Sven", "Combo"}, "Mask Of Ma
 Sven.Satan = Menu.AddOptionSlider({"Hero Specific", "Sven", "Auto Satanic"}, "hp for acrivation", 400, 2000, 1000)
 
 function Sven.OnUpdate()
-  
+
 
   me = Heroes.GetLocal()
   mana = NPC.GetMana(me)
@@ -27,6 +27,7 @@ function Sven.OnUpdate()
     if not me or NPC.GetUnitName(me) ~= "npc_dota_hero_sven" then return end
 
     if Menu.IsKeyDown(Sven.Key) and Menu.IsEnabled(Sven.Enable) then Sven.Combo(me, enemy) end
+
     satanic = NPC.GetItem(me, "item_satanic")
     if satanic and Entity.GetHealth(me) < hp and Menu.IsEnabled(Sven.AddSatanic) and Ability.IsCastable(satanic, mana) and Ability.IsReady(satanic) then
               Ability.CastNoTarget(satanic)
@@ -83,22 +84,19 @@ end
 over = Entity.GetHeroesInRadius(enemy, 255, Enum.TeamType.TEAM_FRIEND)
 
 
-
-
-
 if NPC.IsLinkensProtected(enemy) then
   for _,hero in pairs(over) do
   if stun and Menu.IsEnabled(Sven.AddStun) and Ability.IsCastable(stun, mana) and Ability.IsReady(stun) then
      Ability.CastTarget(stun, hero)
-else
-   if stun and Menu.IsEnabled(Sven.AddStun) and Ability.IsCastable(stun, mana) and Ability.IsReady(stun) then
+     return
+   end
+ end
+end
+
+   if not NPC.IsLinkensProtected(enemy) and stun and Menu.IsEnabled(Sven.AddStun) and Ability.IsCastable(stun, mana) and Ability.IsReady(stun) then
    Ability.CastTarget(stun, enemy)
  return
 end
-end
-end
-end
-
 
 
 
