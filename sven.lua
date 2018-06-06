@@ -2,7 +2,7 @@ local Sven = {}
 
 enemy = nil
 me = nil
-Furion.Target = nil
+
 
 
 Sven.Enable = Menu.AddOptionBool({ "Hero Specific", "Sven" }, "Enable Combo?", false)
